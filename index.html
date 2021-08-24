@@ -4,6 +4,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Password Generator in JavaScript</title>
 <meta name="description" content="Pronounceable/memorable password generator in Javascript.">
+<style>
+#text {
+  margin-left: 20px;
+  font-weight: bold;
+}
+</style>
 <script src="gpw.js"></script>
 
 <!-- .. Function that generates a list of 10 passwords and inserts them into the page. -->
@@ -37,14 +43,17 @@
   This was originally designed by <a href="https://www.multicians.org/thvv/gpw.html">Tom Van Vleck</a> and has been adapted to run as a github page.
 </p>
 
+<hr />
+
 <!-- Copy this section into the BODY of your page to define a form with a button. -->
 <!-- .. the id "text" must be unique on the page. Its content will be replaced by passwords. -->
 <form method="POST" class="fm" action="#" onsubmit="return generate('text')">
-  <p id="text">...</p>
   <input name="gen" type="submit" value="Generate Passwords">
+  <p id="text">...</p>
 </form>
 <!-- end copy -->
 
+<hr />
 <p>
   The source of randomness for this generator is the Javascript function <span class="tty">Math.random()</span>.
   Feel free to view source and copy and modify the code as necessary for your needs.  Please
