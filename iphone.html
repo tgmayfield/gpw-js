@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html manifest="gpwapp.manifest" lang="en"> <!-- must be served as text/cache-manifest, see .htaccess -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<link rel="apple-touch-icon" href="gpw-iphon-icon.png"/> <!-- 57px x 57px -->
+<link rel="apple-touch-startup-image" href="gpw-iphon-home.png" /> <!-- 320px x 460px -->
+<meta name="description" content="Pronounceable password generator in Javascript.">
+<title>GPW</title>
+<style type="text/css"  media="screen, mobile" title="main" charset="utf-8">
+#outer {
+  width: 320px;
+}
+#text {
+  margin-left: 20px;
+  font-weight: bold;
+  font-family: monospace;
+  font-size: 120%;
+}
+</style>
+<script src="gpw.js"></script>
+<script>
+  function generate() {
+    var count = parseInt(document.getElementById('count').value);
+    var length = parseInt(document.getElementById('length').value);
+
+    var result = "";
+
+    for (i = 0; i <= count; i++) {
+      var password = GPW.pronounceable(length);
+      if (password.length < length) {
+        // Edge case in the "25 Jan 2016" note below
+        i--;
+        continue;
+      }
+
+      result += password + "\n<br />\n";
+    }
+
+    document.getElementById("text").innerHTML = result;
+    return false;
+  } // generate
+
+  function load() {
+    var count = document.getElementById('count');
+    if (localStorage.countValue) {
+      count.value = localStorage.countValue;
+    }
+    count.addEventListener('blur', function() {
+      localStorage.countValue = count.value;
+    }, false);
+
+    var length = document.getElementById('length');
+    if (localStorage.lengthValue) {
+      length.value = localStorage.lengthValue;
+    }
+    length.addEventListener('blur', function() {
+      localStorage.lengthValue = length.value;
+    }, false);
+
+    generate();
+  }
+</script>
+</head>
+<body onload="load()">
+<div class="outer">
+<h1>Password Generator</h1>
+<p class="inst">
+  Passwords are generated locally on your device.
+  Add capitalization, digits, &amp; punctuation.
+</p>
+<form method="POST" class="fm" action="#" onsubmit="return generate()">
+  <p>
+    <label for="count">Count:</label> <input name="count" id="count" type="number" min="1" max="40" value="10" />
+  </p>
+  <p>
+    <label for="length">Length:</label> <input name="length" id="length" type="number" min="4" max="500" value="16" />
+  </p>
+  <p>
+    <input name="gen" type="submit" value="Generate Passwords">
+  <p>
+  <p id="text">...</p>
+</form>
+<p class="inst">
+  iPhone: select "save to home screen" for local use<br>
+  Info: <a href="https://tgmayfield.github.io/gpw-js/" target="_blank">https://tgmayfield.github.io/gpw-js/</a><br>
+  Original: <a href="https://www.multicians.org/thvv/gpw-js.html" target="_blank">https://www.multicians.org/thvv/gpw-js.html</a>
+</p>
+</div>
+</body>
+</html>
+
+
+
