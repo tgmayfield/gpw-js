@@ -1,114 +1,80 @@
-
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Password Generator in JavaScript</title>
-    <meta name="description" content="Pronounceable password generator in Javascript.">
-    <meta name="keywords" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- stdformat.htmi -->
-<link rel="stylesheet" href="tvvstyle.css">
-<style>
-body {margin: 0px 0px; padding: 0px; text-align: center;} 
-.outer {min-width: 200px; max-width: 800px; width: auto !important; width: 600px; margin: 0px auto; text-align: left; padding: 5px;}
-.tail {text-align: center; margin: 10px auto;}
-@media print {
- .navbar {display: none;}
- .tail {display: none;}
- a {text-decoration: none;}
- a:link {color: black;}
-}
-</style>
-<link rel="stylesheet" href="../thvv/tvvstyle.css">
-<style>
-@media print {
- .navbar {display: none;}
- .tail {display: none;}
- a {text-decoration: none;}
- a:link {color: black;}
-}
-  #text {font-family: monospace; font-size: 200%; font-weight: bold;}
-  .fm {margin-left: 40px;}
-</style>
-<!-- Javascript code to generate random pronounceable passwords. -->
-<!-- Copy this section into the HEAD of your page. -->
-<!-- .. insert the library that generates one random password. -->
-    <script src="gpw.js"></script>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Password Generator in JavaScript</title>
+<meta name="description" content="Pronounceable/memorable password generator in Javascript.">
+<script src="gpw.js"></script>
+
 <!-- .. Function that generates a list of 10 passwords and inserts them into the page. -->
-    <script>
-      function generate(idname) {
-        var x = "";
-        var s;
-        for (i=0; i<=10; i++) {
-	  s = "";
-	  while (s.length < 11) {
-	    s = GPW.pronounceable(12);
-          }
-	  x += s + "<br>";
-	}
-	var v = document.getElementById(idname);
-	v.innerHTML = x;
-	return false;
-      } // generate
-    </script>
+<script>
+  function generate(idname) {
+    var x = "";
+    var s;
+    for (i=0; i<=10; i++) {
+      s = "";
+      while (s.length < 11) {
+        s = GPW.pronounceable(12);
+      }
+      x += s + "<br>";
+    }
+    var v = document.getElementById(idname);
+    v.innerHTML = x;
+    return false;
+  } // generate
+</script>
 <!-- end copy -->
 <!-- Add the attribute 'onload="generate('text')" to your BODY tag -->
 <!-- .. to populate the page with some passwords when it opens. -->
-  </head>
-  <body onload="generate('text')"> 
-    <div class="outer">
+</head>
+<body onload="generate('text')">
 <h1>Password Generator</h1>
 <p>
-  This page generates 12-character "pronounceable" passwords <b>in your browser</b> using Javascript.
-  (I increased from 8 to 12 because of recent advances in password cracking.)
+  This page generates "pronounceable" passwords <b>in your browser</b> using Javascript.
   Pick one and transform it by inserting capitalization, digits, and punctuation.
+</p>
+<p>
+  This was originally designed by <a href="https://www.multicians.org/thvv/gpw.html">Tom Van Vleck</a> and has been adapted to run as a github page.
 </p>
 
 <!-- Copy this section into the BODY of your page to define a form with a button. -->
 <!-- .. the id "text" must be unique on the page. Its content will be replaced by passwords. -->
 <form method="POST" class="fm" action="#" onsubmit="return generate('text')">
   <p id="text">...</p>
-  <input name="gen" type="submit" value="Generate Passwords"> 
+  <input name="gen" type="submit" value="Generate Passwords">
 </form>
 <!-- end copy -->
 
-<p>
-  To add this function to your own web page, first copy <a href="gpw.js">"gpw.js"</a>, 
-  and then view the source of this web page to see how to invoke it.
-</p>
-<p>
-  Once <span class="cmd">gpw.js</span> is loaded on your device, it generates passwords locally on your device, without accessing the Internet.
-</p>
 <p>
   The source of randomness for this generator is the Javascript function <span class="tty">Math.random()</span>.
   Feel free to view source and copy and modify the code as necessary for your needs.  Please
 </p>
 <ul>
   <li>Share your source with others freely</li>
-  <li>Let me know you're using it</li>
-  <li>Give me credit, and all the other pioneers, if you use the data or algorithms. (A link to this page is sufficient.)</li>
+  <li>Let Tom Van Vleck know you're using it</li>
+  <li>Give him credit, and all the other pioneers, if you use the data or algorithms.</li>
+  <li>More at: <a href="https://www.multicians.org/thvv/gpw.html">https://www.multicians.org/thvv/gpw.html</a></li>
 </ul>
 
 <h2>History</h2>
 <p>
-  This password generator is modeled after <a href="../multicians.html#Gasser" title="Multician: Contractor (MITRE): Multics Security Enhancements, password generator">Morrie Gasser's</a> original generator described in 
+  This password generator is modeled after <a href="../multicians.html#Gasser" title="Multician: Contractor (MITRE): Multics Security Enhancements, password generator">Morrie Gasser's</a> original generator described in
 </p>
 <ul>
   <li>
-    Gasser, M., 
-    <cite>A Random Word Generator for Pronouncable Passwords</cite>, 
-    MTR-3006, The MITRE Corporation, Bedford, MA 01730, 
-    ESD-TR-75-97, HQ Electronic Systems Division, Hanscom AFB, 
+    Gasser, M.,
+    <cite>A Random Word Generator for Pronouncable Passwords</cite>,
+    MTR-3006, The MITRE Corporation, Bedford, MA 01730,
+    ESD-TR-75-97, HQ Electronic Systems Division, Hanscom AFB,
     MA 01731.
     NTIS AD A 017676.
   </li>
 </ul>
 
 <p>
-  except that Morrie's used a second-order approximation to English and this generator uses a <b>third-order</b> approximation. 
-  A descendant of Gasser's generator was added to the <a href="../multics.html" title="Multics site home page">Multics</a> operating system by <a href="../mgg.html#Guardian" title="glossary: CISL/MITRE/USAF project that added AIM, the Access Isolation Mechanism,...">Project Guardian</a> in the mid 1970s, 
-  and I believe Digital's VMS added a similar feature in the 80s. 
+  except that Morrie's used a second-order approximation to English and this generator uses a <b>third-order</b> approximation.
+  A descendant of Gasser's generator was added to the <a href="../multics.html" title="Multics site home page">Multics</a> operating system by <a href="../mgg.html#Guardian" title="glossary: CISL/MITRE/USAF project that added AIM, the Access Isolation Mechanism,...">Project Guardian</a> in the mid 1970s,
+  and I believe Digital's VMS added a similar feature in the 80s.
   FIPS Standard 181 describes a similar digraph-based generator, derived from Gasser's.
 </p>
 <p>
@@ -119,7 +85,7 @@ body {margin: 0px 0px; padding: 0px; text-align: center;}
 </p>
 
 <p>
-  The first digraph-based password generator I know of was written by <a href="../multicians.html#Edwards" title="Multician: System (MIT): CTSS, XRAY.">Daniel J. Edwards</a> about 1965 
+  The first digraph-based password generator I know of was written by <a href="../multicians.html#Edwards" title="Multician: System (MIT): CTSS, XRAY.">Daniel J. Edwards</a> about 1965
   for MIT's <a href="../thvv/7094.html" title="The IBM 7094 computer, and MIT Computation Center&#39;s CTSS timesharing system.">CTSS</a> timesharing system.
   Over the years I have implemented versions of this code in
   Multics PL/I, Tandem TAL, C/C++, Java, and JavaScript.
@@ -131,45 +97,35 @@ body {margin: 0px 0px; padding: 0px; text-align: center;}
   This web application will cache on your phone and can be used even without network connectivity.
 </p>
 <p>
-  (21 Jan 2013) 
+  (21 Jan 2013)
   James Pearson used my JavaScript function to generate multi-word passphrases.
   An online demo is at <span class="cmd">https://changedmy.name/pronounceable-password-generator/</span>
   Source is on Github: <span class="cmd">https://github.com/xiongchiamiov/pronounceable-password-generator</span>
 </p>
 <p>
-  (25 Jan 2016) 
+  (25 Jan 2016)
   I get mail occasionally from people that point out that some passwords are short.
   This can happen if the input dictionary contains some digraphs that only appear at the end of a word, such as "fy" and "qs".
   The algorithm gets "trapped."  You could generate your own dictionary with extra words to prevent this, if you think it is a problem.
 </p>
-
-<h2>General</h2> 
 <p>
-  The best way to use generated passwords is to modify them in ways known only to you. 
+  (24 Aug 2021)
+  Tom Mayfield adapted this to work as a github page.
+</p>
+
+<h2>General</h2>
+<p>
+  The best way to use generated passwords is to modify them in ways known only to you.
   Make some letters capital, or insert punctuation and numbers, in order to use a larger alphabet.
   You could also generate two passwords and combine them.
 </p>
 
 <p>
-  <em>If you wish to secure extremely valuable assets, consider using better sources of randomness, longer passwords, or stronger methods than passwords.</em> 
-  See <a href="http://www.ietf.org/rfc/rfc4086.txt?number=4086" title="new window: http://www.ietf.org/rfc/rfc4086.txt?number=4086" target="_blank" rel="noopener"><span class="nb"><img src="mulimg/tinyglob.gif" alt="" width="12" height="11" border="0" style="display: inline;"> RFC 4086, Randomness Requirements for Security</span></a>, D. Eastlake, 3rd, J. Schiller, S. Crocker. June 2005.
+  <b>Reusing passwords is very risky.</b>  Generate fresh ones for each need and store a list in an encrypted file.
+  (Static or reusable passwords are obsolete.
+  If you have a choice of authentication methods,
+  look for a stronger method than passwords.)
 </p>
 
-<p>
-  <b>Reusing passwords is very risky.</b>  Generate fresh ones for each need and store a list in an encrypted file. 
-  (Static or reusable passwords are obsolete. 
-  If you have a choice of authentication methods, 
-  look for a stronger method than passwords.) 
-</p>
-
-      <div class="tail">
-       <div class="textnav">
-	 <a href="../thvv/tvv-home.html?1" title="Home Page">Home</a> | <a href="../thvv/tvvvita.html?1" title="Vita">Resume</a> | <a href="../multics.html" title="Multics site home page">Multics</a> | <a href="../thvv/7094.html?1" title="The IBM 7094 computer, and MIT Computation Center&#39;s CTSS timesharing system.">CTSS</a>
-	 <br>
-	 <a href="../thvv/tvvswe.html?1" title="Stories about software engineering practices and lessons.">SE Stories</a> | <a href="../thvv/mulvaney.html?1" title="Cartoon booklet about bomb disposal from World War II.">Mulvaney</a> | <a href="../thvv/mushrooms.html?1" title="Lessons about hunting mushrooms.">Mushrooms</a> | <a href="../thvv/affinity.html?1" title="How to use Affinity Photo to prepare web graphics.">Photo</a> | <a href="../thvv/borges-animals.html?1" title="Jorge Luis Borges&#39; essay on classification of animals.">Borges</a>
-       </div>
-      <form method="post" action="https://multicians.org/cgi-sys/cgiwrap/thvv/squirnet.cgi" class="mf"><address><input type="hidden" name="formtpt" value="vvmft.txt"><input type="hidden" name="name" value="Tom Van Vleck"><input type="hidden" name="sortkey" value="editor"><input type="text" name="approved" size="9" class="mfx"><input name="send" type="submit" value="mail Tom Van Vleck" title="send mail to Tom Van Vleck" class="mfaddr"></address></form>
-      </div>
-    </div>
-  </body>
+</body>
 </html>
